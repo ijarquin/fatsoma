@@ -1,4 +1,23 @@
-export default async function SalesPacePage() {
+'use client'
+
+import { useQuery } from '@tanstack/react-query'
+import type { AnalyticsData } from '@/types'
+
+async function fetchAnalytics(): Promise<AnalyticsData> {
+  const res = await fetch('/api/data')
+  if (!res.ok) throw new Error('Failed to fetch analytics data')
+  return res.json()
+}
+
+export default function SalesPacePage() {
+  const { data, isPending, isError } = useQuery({
+    queryKey: ['analytics'],
+    queryFn: fetchAnalytics,
+  })
+
+  if (isPending) return null
+  if (isError) return null
+
   return (
     <main className="w-full">
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-10">
@@ -8,5 +27,5 @@ export default async function SalesPacePage() {
         </p>
       </div>
     </main>
-  );
+  )
 }

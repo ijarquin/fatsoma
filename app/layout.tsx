@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Providers from "./providers";
 
 export const metadata: Metadata = {
   title: "Analytics Dashboard Take-Home Starter",
@@ -11,5 +12,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <html lang="en"><body>{children}</body></html>;
+  return <html lang="en"><body><Providers>{children}</Providers></body></html>;
 }
