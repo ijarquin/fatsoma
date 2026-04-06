@@ -38,7 +38,7 @@ export default function RootLayout({
                       href="/dashboard/sales-pace"
                       className="tracking-wide uppercase inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium border-transparent text-stone-500 hover:border-amber-300 hover:text-stone-800"
                     >
-                      Sales Pace
+                      Sales Pace Dashboard
                     </Link>
                   </div>
                 </div>
