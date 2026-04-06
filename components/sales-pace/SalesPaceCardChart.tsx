@@ -10,7 +10,8 @@ import {
 import type { EventSales } from "@/hooks/useEventsSaleData";
 
 const chartConfig = {
-  ticketsSold: { label: "Tickets Sold", color: "var(--chart-1)" },
+  weekday: { label: "Weekday", color: "var(--chart-1)" },
+  weekend: { label: "Weekend", color: "var(--chart-2)" },
 };
 
 export default function SalesPaceCardChart({
