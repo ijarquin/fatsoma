@@ -30,6 +30,14 @@ vi.mock("@/components/sales-pace/SalesPaceCard", () => ({
   ),
 }));
 
+vi.mock("@/components/sales-pace/SalesPaceCardChart", () => ({
+  default: () => null,
+}));
+
+vi.mock("@/components/sales-pace/SalesPaceCardLegend", () => ({
+  default: () => null,
+}));
+
 vi.mock("@/components/sales-pace/SalesPaceCardHeader", () => ({
   default: ({ selected, onEventChange }: any) => (
     <div>
