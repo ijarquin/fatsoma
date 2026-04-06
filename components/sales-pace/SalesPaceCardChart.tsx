@@ -9,9 +9,11 @@ import {
 } from "@/components/ui/chart";
 import type { EventSales } from "@/hooks/useEventsSaleData";
 
+import { WEEKDAY_COLOR, WEEKEND_COLOR } from "./chartColors";
+
 const chartConfig = {
-  weekday: { label: "Weekday", color: "var(--chart-1)" },
-  weekend: { label: "Weekend", color: "var(--chart-2)" },
+  weekday: { label: "Weekday", color: WEEKDAY_COLOR },
+  weekend: { label: "Weekend", color: WEEKEND_COLOR },
 };
 
 export default function SalesPaceCardChart({
@@ -46,7 +48,7 @@ export default function SalesPaceCardChart({
             {selected.dailySales.map((entry, i) => (
               <Cell
                 key={i}
-                fill={entry.isWeekend ? "var(--chart-2)" : "var(--chart-1)"}
+                fill={entry.isWeekend ? WEEKEND_COLOR : WEEKDAY_COLOR}
               />
             ))}
           </Bar>
