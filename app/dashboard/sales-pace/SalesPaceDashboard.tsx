@@ -1,19 +1,20 @@
-'use client'
+"use client";
+import SalesPaceCard from "@/components/sales-pace/SalesPaceCard";
 
-import { useQuery } from '@tanstack/react-query'
-import type { AnalyticsData } from '@/types'
+import { useQuery } from "@tanstack/react-query";
+import type { AnalyticsData } from "@/types";
 
 async function fetchAnalytics(): Promise<AnalyticsData> {
-  const res = await fetch('/api/data')
-  if (!res.ok) throw new Error('Failed to fetch analytics data')
-  return res.json()
+  const res = await fetch("/api/data");
+  if (!res.ok) throw new Error("Failed to fetch analytics data");
+  return res.json();
 }
 
 export default function SalesPaceDashboard() {
   const { data } = useQuery({
-    queryKey: ['analytics'],
+    queryKey: ["analytics"],
     queryFn: fetchAnalytics,
-  })
+  });
 
   return (
     <main className="w-full">
@@ -22,7 +23,10 @@ export default function SalesPaceDashboard() {
         <p className="text-muted-foreground text-sm mb-8">
           When do tickets sell — early on or close to the event?
         </p>
+        <SalesPaceCard>
+          <div>card initialization</div>
+        </SalesPaceCard>
       </div>
     </main>
-  )
+  );
 }
