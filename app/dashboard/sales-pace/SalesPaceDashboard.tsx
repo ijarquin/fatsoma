@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import LoadingState from "@/components/LoadingState";
+import ErrorState from "@/components/ErrorState";
 import SalesPaceCard from "@/components/sales-pace/SalesPaceCard";
 import SalesPaceCardHeader from "@/components/sales-pace/SalesPaceCardHeader";
 import SalesPaceCardChart from "@/components/sales-pace/SalesPaceCardChart";
@@ -8,8 +10,11 @@ import SalesPaceCardLegend from "@/components/sales-pace/SalesPaceCardLegend";
 import { useEventsSaleData } from "@/hooks/useEventsSaleData";
 
 export default function SalesPaceDashboard() {
-  const { events } = useEventsSaleData();
+  const { events, isLoading, isError } = useEventsSaleData();
   const [selectedEventId, setSelectedEventId] = useState<string>("");
+
+  if (isLoading) return <LoadingState />;
+  if (isError) return <ErrorState />;
 
   const selected =
     events.find((e) => e.eventId === selectedEventId) ?? events[0];
