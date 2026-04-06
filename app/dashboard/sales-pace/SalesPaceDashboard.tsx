@@ -3,6 +3,8 @@
 import { useState } from "react";
 import SalesPaceCard from "@/components/sales-pace/SalesPaceCard";
 import SalesPaceCardHeader from "@/components/sales-pace/SalesPaceCardHeader";
+import SalesPaceCardChart from "@/components/sales-pace/SalesPaceCardChart";
+import SalesPaceCardLegend from "@/components/sales-pace/SalesPaceCardLegend";
 import { useEventsSaleData } from "@/hooks/useEventsSaleData";
 
 export default function SalesPaceDashboard() {
@@ -28,6 +30,8 @@ export default function SalesPaceDashboard() {
             selectedEventId={selectedEventId}
             onEventChange={setSelectedEventId}
           />
+          <SalesPaceCardLegend />
+          <SalesPaceCardChart selected={selected} />
         </SalesPaceCard>
       </div>
     </main>
