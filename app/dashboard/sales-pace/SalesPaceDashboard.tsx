@@ -1,20 +1,18 @@
 "use client";
+
+import { useState } from "react";
 import SalesPaceCard from "@/components/sales-pace/SalesPaceCard";
-
-import { useQuery } from "@tanstack/react-query";
-import type { AnalyticsData } from "@/types";
-
-async function fetchAnalytics(): Promise<AnalyticsData> {
-  const res = await fetch("/api/data");
-  if (!res.ok) throw new Error("Failed to fetch analytics data");
-  return res.json();
-}
+import SalesPaceCardHeader from "@/components/sales-pace/SalesPaceCardHeader";
+import { useEventsSaleData } from "@/hooks/useEventsSaleData";
 
 export default function SalesPaceDashboard() {
-  const { data } = useQuery({
-    queryKey: ["analytics"],
-    queryFn: fetchAnalytics,
-  });
+  const { events } = useEventsSaleData();
+  const [selectedEventId, setSelectedEventId] = useState<string>("");
+
+  const selected =
+    events.find((e) => e.eventId === selectedEventId) ?? events[0];
+
+  if (!selected) return null;
 
   return (
     <main className="w-full">
@@ -24,7 +22,12 @@ export default function SalesPaceDashboard() {
           When do tickets sell — early on or close to the event?
         </p>
         <SalesPaceCard>
-          <div>card initialization</div>
+          <SalesPaceCardHeader
+            events={events}
+            selected={selected}
+            selectedEventId={selectedEventId}
+            onEventChange={setSelectedEventId}
+          />
         </SalesPaceCard>
       </div>
     </main>
