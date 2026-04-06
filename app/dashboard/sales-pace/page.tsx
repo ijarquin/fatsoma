@@ -1,31 +1,24 @@
-'use client'
-
-import { useQuery } from '@tanstack/react-query'
+import { QueryClient, HydrationBoundary, dehydrate } from '@tanstack/react-query'
 import type { AnalyticsData } from '@/types'
+import SalesPaceDashboard from './SalesPaceDashboard'
 
 async function fetchAnalytics(): Promise<AnalyticsData> {
-  const res = await fetch('/api/data')
+  const res = await fetch('http://localhost:3000/api/data')
   if (!res.ok) throw new Error('Failed to fetch analytics data')
   return res.json()
 }
 
-export default function SalesPacePage() {
-  const { data, isPending, isError } = useQuery({
+export default async function SalesPacePage() {
+  const queryClient = new QueryClient()
+
+  await queryClient.prefetchQuery({
     queryKey: ['analytics'],
     queryFn: fetchAnalytics,
   })
 
-  if (isPending) return null
-  if (isError) return null
-
   return (
-    <main className="w-full">
-      <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-10">
-        <h1 className="text-2xl font-bold mb-1">Sales Pace</h1>
-        <p className="text-muted-foreground text-sm mb-8">
-          When do tickets sell — early on or close to the event?
-        </p>
-      </div>
-    </main>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <SalesPaceDashboard />
+    </HydrationBoundary>
   )
 }
